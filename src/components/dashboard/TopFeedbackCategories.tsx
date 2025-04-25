@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +12,8 @@ interface FeedbackItem {
   severity: number;
   verbatim?: string[];
   category: string;
+  merchantGMV?: number;
+  gmvImpact?: number;
 }
 
 interface TopFeedbackCategoriesProps {
@@ -23,6 +24,22 @@ interface TopFeedbackCategoriesProps {
   };
   onFeedbackItemClick: (item: FeedbackItem) => void;
 }
+
+const calculateGMVImpact = (item: FeedbackItem): number => {
+  const baseGMV = item.merchantGMV || 1000000;
+  const severityMultiplier = item.severity / 10;
+  const mentionsWeight = Math.log10(item.count + 1);
+
+  return baseGMV * severityMultiplier * mentionsWeight;
+};
+
+const sortByGMVImpact = (items: FeedbackItem[]): FeedbackItem[] => {
+  return [...items].sort((a, b) => {
+    const aImpact = calculateGMVImpact(a);
+    const bImpact = calculateGMVImpact(b);
+    return bImpact - aImpact;
+  });
+};
 
 const FeedbackItemRow: React.FC<{
   item: FeedbackItem;
@@ -73,6 +90,8 @@ const FeedbackCategoryCard: React.FC<{
   badgeColor?: string;
   onItemClick: (item: FeedbackItem) => void;
 }> = ({ title, items, badgeVariant, badgeColor, onItemClick }) => {
+  const sortedItems = sortByGMVImpact(items);
+  
   return (
     <Card className="h-full">
       <CardHeader className="pb-3">
@@ -87,7 +106,7 @@ const FeedbackCategoryCard: React.FC<{
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0 max-h-[350px] overflow-y-auto">
-        {items.map((item) => (
+        {sortedItems.map((item) => (
           <FeedbackItemRow 
             key={item.id} 
             item={item} 
@@ -115,10 +134,25 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
     );
   };
 
+  const processedData = {
+    complaints: data.complaints.map(item => ({
+      ...item,
+      gmvImpact: calculateGMVImpact(item)
+    })),
+    improvements: data.improvements.map(item => ({
+      ...item,
+      gmvImpact: calculateGMVImpact(item)
+    })),
+    praises: data.praises.map(item => ({
+      ...item,
+      gmvImpact: calculateGMVImpact(item)
+    }))
+  };
+
   const filteredData = {
-    complaints: filterItems(data.complaints),
-    improvements: filterItems(data.improvements),
-    praises: filterItems(data.praises),
+    complaints: filterItems(processedData.complaints),
+    improvements: filterItems(processedData.improvements),
+    praises: filterItems(processedData.praises),
   };
 
   return (
@@ -162,4 +196,3 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
 };
 
 export default TopFeedbackCategories;
-

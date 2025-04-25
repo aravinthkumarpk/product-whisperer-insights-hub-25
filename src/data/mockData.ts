@@ -1,4 +1,3 @@
-
 // Mock data for the Product Insights Dashboard
 
 const keyMetrics = [
@@ -104,6 +103,7 @@ const topFeedbackCategories = {
       trend: 15,
       severity: 8,
       category: "COD",
+      merchantGMV: 5000000,
       verbatim: [
         "COD delivery took 2 days longer than prepaid orders",
         "Cash collection issues causing delivery delays",
@@ -158,6 +158,7 @@ const topFeedbackCategories = {
       trend: 18,
       severity: 4,
       category: "COD",
+      merchantGMV: 3000000,
       verbatim: [
         "Would like to pay via UPI on delivery",
         "Digital payment options needed for COD",
@@ -212,6 +213,7 @@ const topFeedbackCategories = {
       trend: -12,
       severity: 2,
       category: "COD",
+      merchantGMV: 2000000,
       verbatim: [
         "COD delivery was faster than expected",
         "Smooth cash handling process",
