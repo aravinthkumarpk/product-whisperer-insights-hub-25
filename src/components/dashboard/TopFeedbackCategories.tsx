@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 interface FeedbackItem {
   id: string;
@@ -102,19 +103,49 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
   data,
   onFeedbackItemClick,
 }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filterItems = (items: FeedbackItem[]) => {
+    return items.filter(
+      (item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.verbatim?.some((text) =>
+          text.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    );
+  };
+
+  const filteredData = {
+    complaints: filterItems(data.complaints),
+    improvements: filterItems(data.improvements),
+    praises: filterItems(data.praises),
+  };
+
   return (
     <div>
-      <h3 className="text-lg font-medium mb-4">Top Feedback Categories</h3>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-medium">Top Feedback Categories</h3>
+        <div className="relative w-64">
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            type="search"
+            placeholder="Search insights..."
+            className="pl-8"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <FeedbackCategoryCard 
           title="Complaints" 
-          items={data.complaints} 
+          items={filteredData.complaints} 
           badgeVariant="destructive"
           onItemClick={onFeedbackItemClick}
         />
         <FeedbackCategoryCard 
           title="Improvements" 
-          items={data.improvements} 
+          items={filteredData.improvements} 
           badgeVariant="outline"
           onItemClick={onFeedbackItemClick}
         />
@@ -122,7 +153,7 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
           title="Praises" 
           badgeVariant="default"
           badgeColor="bg-emerald-500 hover:bg-emerald-500"
-          items={data.praises} 
+          items={filteredData.praises} 
           onItemClick={onFeedbackItemClick}
         />
       </div>
@@ -131,3 +162,4 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
 };
 
 export default TopFeedbackCategories;
+
