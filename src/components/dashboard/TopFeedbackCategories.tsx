@@ -193,16 +193,16 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
             ))}
           </select>
           <div className="relative w-64">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search insights..."
-            className="pl-8"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Search insights..."
+              className="pl-8"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         </div>
-      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <FeedbackCategoryCard 
           title="Complaints" 
