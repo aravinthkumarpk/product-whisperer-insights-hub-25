@@ -49,27 +49,76 @@ const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({
     "Abandoned cart issues"
   ];
 
-  const verbatim = item.verbatim || [
+  const verbatim: VerbatimFeedback[] = [
     {
-      text: "I tried to use Magic Checkout but it got stuck at the final step.",
+      text: "COD delivery took 2 days longer than prepaid orders. This is affecting our customer satisfaction severely.",
       merchantName: "TechGear Store",
       merchantId: "TECH001",
       merchantSegment: "Enterprise",
       merchantCategory: "Ecom"
     },
     {
-      text: "The checkout experience was frustrating because it kept asking me to re-enter my card details.",
+      text: "Cash collection issues causing delivery delays. Courier partner often returns without collecting payment.",
       merchantName: "InsureRight",
       merchantId: "INS023",
       merchantSegment: "MM+",
       merchantCategory: "Insurance"
     },
     {
-      text: "We've had several customers complain about this issue in the last week.",
+      text: "We've had several customers complain about COD delays in the last week. It's affecting our repeat business.",
       merchantName: "FashionHub",
       merchantId: "FAS104",
       merchantSegment: "EB",
       merchantCategory: "Ecom"
+    },
+    {
+      text: "Delivery personnel not carrying enough change for COD orders, causing customers to cancel orders at last minute.",
+      merchantName: "HomeStyles",
+      merchantId: "HOME076",
+      merchantSegment: "MM+",
+      merchantCategory: "Home Decor"
+    },
+    {
+      text: "COD orders marked as delivered but payment not updated in our dashboard for 24-48 hours.",
+      merchantName: "OrganicFoods",
+      merchantId: "ORG045",
+      merchantSegment: "EB",
+      merchantCategory: "Food & Beverage"
+    },
+    {
+      text: "Customers selecting COD option but delivery getting delayed by 3-5 days compared to online payment orders.",
+      merchantName: "GadgetWorld",
+      merchantId: "GAD112",
+      merchantSegment: "Enterprise",
+      merchantCategory: "Electronics"
+    },
+    {
+      text: "COD order status not updating correctly in the merchant portal. Shows as 'pending' even after delivery.",
+      merchantName: "KidsCorner",
+      merchantId: "KID089",
+      merchantSegment: "MM+",
+      merchantCategory: "Toys & Games"
+    },
+    {
+      text: "Had to refund three customers this week due to COD delivery delays causing cancellations.",
+      merchantName: "BeautyBoutique",
+      merchantId: "BEAUTY201",
+      merchantSegment: "EB",
+      merchantCategory: "Health & Beauty"
+    },
+    {
+      text: "COD orders getting deprioritized in shipping queue, causing delays and customer complaints.",
+      merchantName: "FitnessFirst",
+      merchantId: "FIT077",
+      merchantSegment: "MM+",
+      merchantCategory: "Sports & Fitness"
+    },
+    {
+      text: "Delivery partners refusing to fulfill COD orders to certain pin codes, limiting our market reach.",
+      merchantName: "BookHaven",
+      merchantId: "BOOK132",
+      merchantSegment: "Enterprise",
+      merchantCategory: "Books & Media"
     }
   ];
 
