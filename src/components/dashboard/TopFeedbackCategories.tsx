@@ -85,7 +85,6 @@ const FeedbackItemRow: React.FC<{
             </p>
           </div>
         </div>
-        </div>
       </div>
       <div className={`flex items-center space-x-1 text-sm font-medium ${
         item.trend > 0 ? "text-red-500" : item.trend < 0 ? "text-emerald-500" : "text-gray-500"
@@ -97,6 +96,7 @@ const FeedbackItemRow: React.FC<{
         ) : null}
         <span>{Math.abs(item.trend)}%</span>
       </div>
+    </div>
     </div>
   );
 };
