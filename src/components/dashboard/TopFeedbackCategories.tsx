@@ -1,7 +1,6 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { ArrowDown, ArrowUp } from "lucide-react";
 
@@ -66,64 +65,68 @@ const FeedbackItemRow: React.FC<{
   );
 };
 
+const FeedbackCategoryCard: React.FC<{
+  title: string;
+  items: FeedbackItem[];
+  badgeVariant: "destructive" | "outline" | "default";
+  badgeColor?: string;
+  onItemClick: (item: FeedbackItem) => void;
+}> = ({ title, items, badgeVariant, badgeColor, onItemClick }) => {
+  return (
+    <Card className="h-full">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-md font-medium flex items-center">
+          <Badge 
+            variant={badgeVariant} 
+            className={`mr-2 px-1.5 ${badgeColor || ""}`}
+          >
+            {items.length}
+          </Badge>
+          {title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-0 max-h-[350px] overflow-y-auto">
+        {items.map((item) => (
+          <FeedbackItemRow 
+            key={item.id} 
+            item={item} 
+            onClick={onItemClick}
+          />
+        ))}
+      </CardContent>
+    </Card>
+  );
+};
+
 const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
   data,
   onFeedbackItemClick,
 }) => {
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-lg font-medium">Top Feedback Categories</CardTitle>
-      </CardHeader>
-      <CardContent className="p-0">
-        <Tabs defaultValue="complaints" className="w-full">
-          <TabsList className="w-full grid grid-cols-3 mb-2 px-6 pt-1">
-            <TabsTrigger value="complaints">
-              <Badge variant="destructive" className="mr-1 px-1.5">{data.complaints.length}</Badge>
-              Complaints
-            </TabsTrigger>
-            <TabsTrigger value="improvements">
-              <Badge variant="outline" className="mr-1 px-1.5">{data.improvements.length}</Badge>
-              Improvements
-            </TabsTrigger>
-            <TabsTrigger value="praises">
-              <Badge variant="default" className="mr-1 px-1.5 bg-emerald-500 hover:bg-emerald-500">{data.praises.length}</Badge>
-              Praises
-            </TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="complaints" className="max-h-[400px] overflow-y-auto">
-            {data.complaints.map((item) => (
-              <FeedbackItemRow 
-                key={item.id} 
-                item={item} 
-                onClick={onFeedbackItemClick}
-              />
-            ))}
-          </TabsContent>
-          
-          <TabsContent value="improvements" className="max-h-[400px] overflow-y-auto">
-            {data.improvements.map((item) => (
-              <FeedbackItemRow 
-                key={item.id} 
-                item={item} 
-                onClick={onFeedbackItemClick}
-              />
-            ))}
-          </TabsContent>
-          
-          <TabsContent value="praises" className="max-h-[400px] overflow-y-auto">
-            {data.praises.map((item) => (
-              <FeedbackItemRow 
-                key={item.id} 
-                item={item} 
-                onClick={onFeedbackItemClick}
-              />
-            ))}
-          </TabsContent>
-        </Tabs>
-      </CardContent>
-    </Card>
+    <div>
+      <h3 className="text-lg font-medium mb-4">Top Feedback Categories</h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <FeedbackCategoryCard 
+          title="Complaints" 
+          items={data.complaints} 
+          badgeVariant="destructive"
+          onItemClick={onFeedbackItemClick}
+        />
+        <FeedbackCategoryCard 
+          title="Improvements" 
+          items={data.improvements} 
+          badgeVariant="outline"
+          onItemClick={onFeedbackItemClick}
+        />
+        <FeedbackCategoryCard 
+          title="Praises" 
+          badgeVariant="default"
+          badgeColor="bg-emerald-500 hover:bg-emerald-500"
+          items={data.praises} 
+          onItemClick={onFeedbackItemClick}
+        />
+      </div>
+    </div>
   );
 };
 

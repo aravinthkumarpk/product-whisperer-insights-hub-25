@@ -1,3 +1,4 @@
+
 // Mock data for the Product Insights Dashboard
 
 const keyMetrics = [
@@ -122,6 +123,32 @@ const topFeedbackCategories = {
         "POS sync issues causing duplicate transactions"
       ]
     },
+    {
+      id: generateId(),
+      title: "Customer information not being saved correctly",
+      count: 143,
+      trend: 8,
+      severity: 6,
+      category: "Data Management",
+      verbatim: [
+        "Customer details disappear after refreshing the page",
+        "Having to re-enter customer information repeatedly",
+        "Address validation errors preventing order completion"
+      ]
+    },
+    {
+      id: generateId(),
+      title: "Mobile checkout experience is confusing for customers",
+      count: 124,
+      trend: 3,
+      severity: 5,
+      category: "User Experience",
+      verbatim: [
+        "Too many steps in the mobile checkout flow",
+        "Buttons are too small on mobile devices",
+        "Form validation errors not clearly visible on smartphones"
+      ]
+    },
   ],
   improvements: [
     {
@@ -150,6 +177,32 @@ const topFeedbackCategories = {
         "Request for batch processing of orders"
       ]
     },
+    {
+      id: generateId(),
+      title: "Provide more detailed analytics on customer behavior",
+      count: 98,
+      trend: 7,
+      severity: 3,
+      category: "Analytics",
+      verbatim: [
+        "Would like to see customer journey analytics",
+        "Need better insights on abandoned carts",
+        "Request for customer segmentation reports"
+      ]
+    },
+    {
+      id: generateId(),
+      title: "Add customizable email templates for order confirmations",
+      count: 87,
+      trend: 5,
+      severity: 2,
+      category: "Communication",
+      verbatim: [
+        "Want to personalize order confirmation emails",
+        "Need branding options for customer communications",
+        "Request for HTML email template editor"
+      ]
+    },
   ],
   praises: [
     {
@@ -176,6 +229,32 @@ const topFeedbackCategories = {
         "The dashboard is very easy to navigate",
         "Love the new interface updates",
         "Clean and simple design makes work efficient"
+      ]
+    },
+    {
+      id: generateId(),
+      title: "Seamless integration with our existing systems",
+      count: 58,
+      trend: 3,
+      severity: 1,
+      category: "System Integration",
+      verbatim: [
+        "Easy to connect with our inventory management",
+        "API documentation is clear and comprehensive",
+        "Integration process was much faster than expected"
+      ]
+    },
+    {
+      id: generateId(),
+      title: "Fast and reliable payment processing",
+      count: 52,
+      trend: 4,
+      severity: 1,
+      category: "Payment Processing",
+      verbatim: [
+        "Transactions complete quickly even during busy periods",
+        "No more payment failures since switching to this system",
+        "Payment reconciliation is accurate and automatic"
       ]
     },
   ],
