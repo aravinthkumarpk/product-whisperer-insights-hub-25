@@ -225,6 +225,7 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
         />
       </div>
     </div>
+    </div>
   );
 };
 
