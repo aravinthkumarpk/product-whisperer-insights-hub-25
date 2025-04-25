@@ -1,10 +1,18 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Download, Edit, Plus, Share2 } from "lucide-react";
+
+interface VerbatimFeedback {
+  text: string;
+  merchantName: string;
+  merchantId: string;
+  merchantSegment: 'Enterprise' | 'MM+' | 'EB';
+  merchantCategory: string;
+}
 
 interface FeedbackItem {
   id: string;
@@ -12,9 +20,9 @@ interface FeedbackItem {
   count: number;
   trend: number;
   severity: number;
-  verbatim?: string[];
+  verbatim?: VerbatimFeedback[];
   category: string;
-  revenueImpact?: number;
+  gmvImpact?: number;
   affectedMerchants?: number;
   okrsImpacted?: string[];
 }
@@ -30,6 +38,8 @@ const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({
   onClose,
   onRelatedIssueClick 
 }) => {
+  const [showAllVerbatim, setShowAllVerbatim] = useState(false);
+  
   // Mock related issues - in a real app, these would come from the backend
   const relatedIssues = [
     "Payment processing delay",
@@ -38,10 +48,30 @@ const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({
   ];
 
   const verbatim = item.verbatim || [
-    "I tried to use Magic Checkout but it got stuck at the final step.",
-    "The checkout experience was frustrating because it kept asking me to re-enter my card details.",
-    "We've had several customers complain about this issue in the last week."
+    {
+      text: "I tried to use Magic Checkout but it got stuck at the final step.",
+      merchantName: "TechGear Store",
+      merchantId: "TECH001",
+      merchantSegment: "Enterprise",
+      merchantCategory: "Ecom"
+    },
+    {
+      text: "The checkout experience was frustrating because it kept asking me to re-enter my card details.",
+      merchantName: "InsureRight",
+      merchantId: "INS023",
+      merchantSegment: "MM+",
+      merchantCategory: "Insurance"
+    },
+    {
+      text: "We've had several customers complain about this issue in the last week.",
+      merchantName: "FashionHub",
+      merchantId: "FAS104",
+      merchantSegment: "EB",
+      merchantCategory: "Ecom"
+    }
   ];
+
+  const displayVerbatim = showAllVerbatim ? verbatim : verbatim.slice(0, 3);
 
   return (
     <Card>
@@ -81,12 +111,27 @@ const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({
           <div>
             <h4 className="text-sm font-medium mb-2">Verbatim Examples</h4>
             <div className="space-y-3">
-              {verbatim.map((quote, i) => (
-                <div key={i} className="bg-muted p-3 rounded-md text-sm">
-                  "{quote}"
+              {displayVerbatim.map((quote, i) => (
+                <div key={i} className="bg-muted p-3 rounded-md">
+                  <p className="text-sm mb-2">"{quote.text}"</p>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <Badge variant="outline">{quote.merchantName}</Badge>
+                    <Badge variant="outline">ID: {quote.merchantId}</Badge>
+                    <Badge variant="outline">{quote.merchantSegment}</Badge>
+                    <Badge variant="outline">{quote.merchantCategory}</Badge>
+                  </div>
                 </div>
               ))}
             </div>
+            {verbatim.length > 3 && (
+              <Button
+                variant="link"
+                className="mt-2 p-0"
+                onClick={() => setShowAllVerbatim(!showAllVerbatim)}
+              >
+                {showAllVerbatim ? "Show less" : `Show all (${verbatim.length})`}
+              </Button>
+            )}
           </div>
           
           <Separator />
@@ -113,8 +158,8 @@ const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({
             <h4 className="text-sm font-medium mb-2">Business Impact</h4>
             <div className="grid grid-cols-3 gap-4">
               <div className="bg-muted p-3 rounded-md">
-                <p className="text-xs text-muted-foreground">Revenue Impact (based on GMV)</p>
-                <p className="text-lg font-semibold">₹{(item.revenueImpact || 24500).toLocaleString('en-IN')}</p>
+                <p className="text-xs text-muted-foreground">GMV Impact</p>
+                <p className="text-lg font-semibold">₹{(item.gmvImpact || 24500).toLocaleString('en-IN')}</p>
               </div>
               <div className="bg-muted p-3 rounded-md">
                 <p className="text-xs text-muted-foreground">Affected Merchants</p>
