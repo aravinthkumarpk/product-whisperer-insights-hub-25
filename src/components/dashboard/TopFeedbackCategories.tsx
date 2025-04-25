@@ -203,6 +203,8 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
             />
           </div>
         </div>
+      </div>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <FeedbackCategoryCard 
           title="Complaints" 
@@ -224,7 +226,6 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
           onItemClick={onFeedbackItemClick}
         />
       </div>
-    </div>
     </div>
   );
 };
