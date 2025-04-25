@@ -85,6 +85,7 @@ const FeedbackItemRow: React.FC<{
             </p>
           </div>
         </div>
+        </div>
       </div>
       <div className={`flex items-center space-x-1 text-sm font-medium ${
         item.trend > 0 ? "text-red-500" : item.trend < 0 ? "text-emerald-500" : "text-gray-500"
@@ -140,14 +141,18 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
   onFeedbackItemClick,
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedFeature, setSelectedFeature] = useState("all");
+
+  const features = ["all", "payments", "checkout", "onboarding", "shipping", "reporting"];
 
   const filterItems = (items: FeedbackItem[]) => {
     return items.filter(
       (item) =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (selectedFeature === "all" || item.category.toLowerCase() === selectedFeature) &&
+        (item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.verbatim?.some((text) =>
           text.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+        ))
     );
   };
 
@@ -176,7 +181,19 @@ const TopFeedbackCategories: React.FC<TopFeedbackCategoriesProps> = ({
     <div>
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-medium">Top Feedback Categories</h3>
-        <div className="relative w-64">
+        <div className="flex gap-2 items-center">
+          <select
+            className="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors"
+            value={selectedFeature}
+            onChange={(e) => setSelectedFeature(e.target.value)}
+          >
+            {features.map((feature) => (
+              <option key={feature} value={feature}>
+                {feature.charAt(0).toUpperCase() + feature.slice(1)}
+              </option>
+            ))}
+          </select>
+          <div className="relative w-64">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"

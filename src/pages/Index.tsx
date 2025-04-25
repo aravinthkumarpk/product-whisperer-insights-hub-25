@@ -44,7 +44,7 @@ const Index = () => {
       <div className="px-6 py-6 md:px-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">MerchantSays Dashboard</h1>
+            <h1 className="text-2xl font-bold tracking-tight">MerchantSays</h1>
             <p className="text-muted-foreground">
               Voice of merchant analytics and insights
             </p>
