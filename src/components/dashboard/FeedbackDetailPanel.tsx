@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, Download, Edit, Plus, Share2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface VerbatimFeedback {
   text: string;
@@ -39,6 +40,7 @@ const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({
   onRelatedIssueClick 
 }) => {
   const [showAllVerbatim, setShowAllVerbatim] = useState(false);
+  const { toast } = useToast();
   
   // Mock related issues - in a real app, these would come from the backend
   const relatedIssues = [
@@ -73,8 +75,18 @@ const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({
 
   const displayVerbatim = showAllVerbatim ? verbatim : verbatim.slice(0, 3);
 
+  const handleRelatedIssueClick = (issue: string) => {
+    if (onRelatedIssueClick) {
+      onRelatedIssueClick(issue);
+      toast({
+        title: "Navigating to related issue",
+        description: `Loading details for: ${issue}`,
+      });
+    }
+  };
+
   return (
-    <Card>
+    <Card className="animate-in fade-in duration-300">
       <CardHeader>
         <div className="flex items-center">
           <Button variant="ghost" size="sm" className="mr-2 h-8 w-8 p-0" onClick={onClose}>
@@ -144,7 +156,7 @@ const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({
                   key={i} 
                   variant="outline" 
                   className="cursor-pointer hover:bg-accent"
-                  onClick={() => onRelatedIssueClick?.(issue)}
+                  onClick={() => handleRelatedIssueClick(issue)}
                 >
                   {issue}
                 </Badge>
