@@ -99,165 +99,165 @@ const topFeedbackCategories = {
   complaints: [
     {
       id: generateId(),
-      title: "Payment processing timeouts during high-traffic periods",
-      count: 248,
+      title: "Cash on Delivery orders getting delayed",
+      count: 286,
+      trend: 15,
+      severity: 8,
+      category: "COD",
+      verbatim: [
+        "COD delivery took 2 days longer than prepaid orders",
+        "Cash collection issues causing delivery delays",
+        "Delivery personnel not carrying enough change for COD"
+      ]
+    },
+    {
+      id: generateId(),
+      title: "Coupon code not applying correctly",
+      count: 234,
       trend: 12,
-      severity: 9,
-      category: "Payment Processing",
-      verbatim: [
-        "Payment processing takes too long during peak hours",
-        "Customers abandon cart due to payment timeouts",
-        "High-value transactions timing out during checkout"
-      ]
-    },
-    {
-      id: generateId(),
-      title: "Integration with legacy POS systems failing",
-      count: 187,
-      trend: 5,
       severity: 7,
-      category: "System Integration",
+      category: "Coupon Engine",
       verbatim: [
-        "Can't connect our old POS system with the new checkout",
-        "Integration errors with legacy systems",
-        "POS sync issues causing duplicate transactions"
+        "WELCOME50 coupon showing error on checkout",
+        "Multiple coupons not working as advertised",
+        "Discount amount incorrect after applying coupon"
       ]
     },
     {
       id: generateId(),
-      title: "Customer information not being saved correctly",
-      count: 143,
+      title: "Saved addresses disappearing",
+      count: 178,
       trend: 8,
       severity: 6,
-      category: "Data Management",
+      category: "Address Management",
       verbatim: [
-        "Customer details disappear after refreshing the page",
-        "Having to re-enter customer information repeatedly",
-        "Address validation errors preventing order completion"
+        "Have to re-enter address every time I order",
+        "Default address keeps changing randomly",
+        "Address saved but not showing in checkout"
       ]
     },
     {
       id: generateId(),
-      title: "Mobile checkout experience is confusing for customers",
-      count: 124,
-      trend: 3,
-      severity: 5,
-      category: "User Experience",
+      title: "Order placement failures during peak hours",
+      count: 156,
+      trend: 5,
+      severity: 7,
+      category: "Order Processing",
       verbatim: [
-        "Too many steps in the mobile checkout flow",
-        "Buttons are too small on mobile devices",
-        "Form validation errors not clearly visible on smartphones"
+        "Order failed during sale event",
+        "Payment successful but order not confirmed",
+        "Multiple order placement attempts needed"
       ]
-    },
+    }
   ],
   improvements: [
     {
       id: generateId(),
-      title: "Add multi-currency support for international merchants",
-      count: 156,
-      trend: 14,
-      severity: 5,
-      category: "Feature Request",
-      verbatim: [
-        "Need support for multiple currencies",
-        "International merchants requesting currency conversion",
-        "Currency conversion fees are too high"
-      ]
-    },
-    {
-      id: generateId(),
-      title: "Implement bulk order processing capability",
-      count: 132,
-      trend: 9,
+      title: "Add UPI payment option for COD orders",
+      count: 245,
+      trend: 18,
       severity: 4,
-      category: "Feature Request",
+      category: "COD",
       verbatim: [
-        "Need to process multiple orders at once",
-        "Bulk order management would save time",
-        "Request for batch processing of orders"
+        "Would like to pay via UPI on delivery",
+        "Digital payment options needed for COD",
+        "Contactless payment request for COD orders"
       ]
     },
     {
       id: generateId(),
-      title: "Provide more detailed analytics on customer behavior",
-      count: 98,
-      trend: 7,
+      title: "Implement coupon suggestion feature",
+      count: 189,
+      trend: 9,
       severity: 3,
-      category: "Analytics",
+      category: "Coupon Engine",
       verbatim: [
-        "Would like to see customer journey analytics",
-        "Need better insights on abandoned carts",
-        "Request for customer segmentation reports"
+        "Show best applicable coupon automatically",
+        "Need coupon recommendations based on cart",
+        "Suggest coupons during checkout"
       ]
     },
     {
       id: generateId(),
-      title: "Add customizable email templates for order confirmations",
-      count: 87,
-      trend: 5,
-      severity: 2,
-      category: "Communication",
+      title: "Allow multiple shipping addresses per order",
+      count: 167,
+      trend: 7,
+      severity: 4,
+      category: "Address Management",
       verbatim: [
-        "Want to personalize order confirmation emails",
-        "Need branding options for customer communications",
-        "Request for HTML email template editor"
+        "Want to split order to different addresses",
+        "Need gift shipping to multiple addresses",
+        "Bulk order to different locations option"
       ]
     },
+    {
+      id: generateId(),
+      title: "Add order scheduling feature",
+      count: 134,
+      trend: 5,
+      severity: 3,
+      category: "Order Processing",
+      verbatim: [
+        "Would like to schedule future deliveries",
+        "Need recurring order option",
+        "Advance order booking feature request"
+      ]
+    }
   ],
   praises: [
     {
       id: generateId(),
-      title: "Quick and responsive customer support team",
-      count: 87,
-      trend: 15,
+      title: "Fast COD order processing",
+      count: 156,
+      trend: -12,
       severity: 2,
-      category: "Customer Support",
+      category: "COD",
       verbatim: [
-        "Support team resolved our issue within minutes",
-        "Excellent customer service experience",
-        "Very helpful and knowledgeable support staff"
+        "COD delivery was faster than expected",
+        "Smooth cash handling process",
+        "Professional delivery staff for COD"
       ]
     },
     {
       id: generateId(),
-      title: "Intuitive merchant dashboard interface",
-      count: 65,
-      trend: 5,
+      title: "Great coupon savings experience",
+      count: 134,
+      trend: -8,
       severity: 1,
-      category: "User Experience",
+      category: "Coupon Engine",
       verbatim: [
-        "The dashboard is very easy to navigate",
-        "Love the new interface updates",
-        "Clean and simple design makes work efficient"
+        "Easy to apply discount coupons",
+        "Amazing deals with seasonal coupons",
+        "Coupon stacking feature is fantastic"
       ]
     },
     {
       id: generateId(),
-      title: "Seamless integration with our existing systems",
-      count: 58,
-      trend: 3,
+      title: "Seamless address update process",
+      count: 112,
+      trend: -5,
       severity: 1,
-      category: "System Integration",
+      category: "Address Management",
       verbatim: [
-        "Easy to connect with our inventory management",
-        "API documentation is clear and comprehensive",
-        "Integration process was much faster than expected"
+        "Address verification is quick and accurate",
+        "Love the address suggestion feature",
+        "Easy to manage multiple addresses"
       ]
     },
     {
       id: generateId(),
-      title: "Fast and reliable payment processing",
-      count: 52,
-      trend: 4,
+      title: "Quick order confirmation",
+      count: 98,
+      trend: -4,
       severity: 1,
-      category: "Payment Processing",
+      category: "Order Processing",
       verbatim: [
-        "Transactions complete quickly even during busy periods",
-        "No more payment failures since switching to this system",
-        "Payment reconciliation is accurate and automatic"
+        "Instant order confirmation received",
+        "Smooth checkout process",
+        "Order tracking updates are timely"
       ]
-    },
-  ],
+    }
+  ]
 };
 
 export default {
