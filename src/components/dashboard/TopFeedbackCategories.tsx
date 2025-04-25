@@ -41,6 +41,15 @@ const sortByGMVImpact = (items: FeedbackItem[]): FeedbackItem[] => {
   });
 };
 
+const formatGMVImpact = (value: number): string => {
+  if (value >= 1000000) {
+    return `₹${(value / 1000000).toFixed(1)}M`;
+  } else if (value >= 1000) {
+    return `₹${(value / 1000).toFixed(1)}K`;
+  }
+  return `₹${value.toFixed(0)}`;
+};
+
 const FeedbackItemRow: React.FC<{
   item: FeedbackItem;
   onClick: (item: FeedbackItem) => void;
@@ -53,6 +62,8 @@ const FeedbackItemRow: React.FC<{
     return "bg-emerald-500";
   };
 
+  const gmvImpact = calculateGMVImpact(item);
+
   return (
     <div 
       className="flex items-center justify-between py-3 px-4 border-b last:border-0 hover:bg-muted/50 cursor-pointer transition-colors"
@@ -64,9 +75,15 @@ const FeedbackItemRow: React.FC<{
         />
         <div className="flex-1">
           <p className="font-medium text-sm">{item.title}</p>
-          <p className="text-muted-foreground text-xs mt-1">
-            {item.count} mentions
-          </p>
+          <div className="flex items-center gap-2 mt-1">
+            <p className="text-muted-foreground text-xs">
+              {item.count} mentions
+            </p>
+            <span className="text-xs text-muted-foreground">•</span>
+            <p className="text-muted-foreground text-xs font-medium">
+              GMV Impact: {formatGMVImpact(gmvImpact)}
+            </p>
+          </div>
         </div>
       </div>
       <div className={`flex items-center space-x-1 text-sm font-medium ${
