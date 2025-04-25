@@ -97,7 +97,6 @@ const FeedbackItemRow: React.FC<{
         <span>{Math.abs(item.trend)}%</span>
       </div>
     </div>
-    </div>
   );
 };
 
