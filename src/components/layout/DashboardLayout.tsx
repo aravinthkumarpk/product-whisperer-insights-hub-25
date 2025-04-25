@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useState } from "react";
 import {
@@ -28,7 +27,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
   return (
     <div className="flex w-full min-h-screen bg-muted/10">
-      <SidebarProvider defaultCollapsed={false}>
+      <SidebarProvider>
         <Sidebar className="border-r">
           <SidebarHeader className="flex items-center gap-2 px-6">
             <div className="flex items-center gap-2">
@@ -64,7 +63,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                   />
                 </svg>
               </div>
-              <span className="text-lg font-semibold">Product Whisperer</span>
+              <span className="text-lg font-semibold">MerchantSays</span>
             </div>
           </SidebarHeader>
           <SidebarContent>
