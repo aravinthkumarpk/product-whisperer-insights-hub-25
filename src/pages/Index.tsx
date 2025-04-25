@@ -19,6 +19,22 @@ const Index = () => {
     setSelectedFeedbackItem(item);
   };
 
+  const handleRelatedIssueClick = (issue) => {
+    const allFeedback = [
+      ...mockData.topFeedbackCategories.complaints,
+      ...mockData.topFeedbackCategories.improvements,
+      ...mockData.topFeedbackCategories.praises
+    ];
+    
+    const relatedItem = allFeedback.find(item => 
+      item.title.toLowerCase().includes(issue.toLowerCase())
+    );
+    
+    if (relatedItem) {
+      setSelectedFeedbackItem(relatedItem);
+    }
+  };
+
   const handleCloseDetail = () => {
     setSelectedFeedbackItem(null);
   };
@@ -71,6 +87,7 @@ const Index = () => {
           <FeedbackDetailPanel 
             item={selectedFeedbackItem} 
             onClose={handleCloseDetail}
+            onRelatedIssueClick={handleRelatedIssueClick}
           />
         ) : (
           <div className="space-y-6">

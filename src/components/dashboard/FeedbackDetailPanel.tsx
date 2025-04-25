@@ -14,22 +14,29 @@ interface FeedbackItem {
   severity: number;
   verbatim?: string[];
   category: string;
+  revenueImpact?: number;
+  affectedMerchants?: number;
+  okrsImpacted?: string[];
 }
 
 interface FeedbackDetailPanelProps {
   item: FeedbackItem;
   onClose: () => void;
+  onRelatedIssueClick?: (issue: string) => void;
 }
 
-const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({ item, onClose }) => {
-  // Mock related issues
+const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({ 
+  item, 
+  onClose,
+  onRelatedIssueClick 
+}) => {
+  // Mock related issues - in a real app, these would come from the backend
   const relatedIssues = [
     "Payment processing delay",
     "Checkout form validation errors",
     "Abandoned cart issues"
   ];
 
-  // Mock verbatim examples if not provided
   const verbatim = item.verbatim || [
     "I tried to use Magic Checkout but it got stuck at the final step.",
     "The checkout experience was frustrating because it kept asking me to re-enter my card details.",
@@ -88,7 +95,12 @@ const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({ item, onClose
             <h4 className="text-sm font-medium mb-2">Related Issues</h4>
             <div className="flex flex-wrap gap-2">
               {relatedIssues.map((issue, i) => (
-                <Badge key={i} variant="outline" className="cursor-pointer">
+                <Badge 
+                  key={i} 
+                  variant="outline" 
+                  className="cursor-pointer hover:bg-accent"
+                  onClick={() => onRelatedIssueClick?.(issue)}
+                >
                   {issue}
                 </Badge>
               ))}
@@ -98,15 +110,25 @@ const FeedbackDetailPanel: React.FC<FeedbackDetailPanelProps> = ({ item, onClose
           <Separator />
           
           <div>
-            <h4 className="text-sm font-medium mb-2">Estimated Impact</h4>
-            <div className="grid grid-cols-2 gap-4">
+            <h4 className="text-sm font-medium mb-2">Business Impact</h4>
+            <div className="grid grid-cols-3 gap-4">
               <div className="bg-muted p-3 rounded-md">
-                <p className="text-xs text-muted-foreground">Revenue Impact</p>
-                <p className="text-lg font-semibold">-$24,500</p>
+                <p className="text-xs text-muted-foreground">Revenue Impact (based on GMV)</p>
+                <p className="text-lg font-semibold">₹{(item.revenueImpact || 24500).toLocaleString('en-IN')}</p>
               </div>
               <div className="bg-muted p-3 rounded-md">
-                <p className="text-xs text-muted-foreground">Affected Users</p>
-                <p className="text-lg font-semibold">~1,230</p>
+                <p className="text-xs text-muted-foreground">Affected Merchants</p>
+                <p className="text-lg font-semibold">{(item.affectedMerchants || 1230).toLocaleString()}</p>
+              </div>
+              <div className="bg-muted p-3 rounded-md">
+                <p className="text-xs text-muted-foreground">OKRs Impacted</p>
+                <div className="mt-1">
+                  {(item.okrsImpacted || ['Merchant Satisfaction', 'GMV Growth']).map((okr, index) => (
+                    <Badge key={index} variant="secondary" className="mr-1 mb-1">
+                      {okr}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
